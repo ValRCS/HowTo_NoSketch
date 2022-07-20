@@ -25,11 +25,12 @@ https://nosketch.lnb.lv
 ### The following steps are for internal use as they  require access to our server - researchers should contact dh@lnb.lv to add their corpus
 
 * copy meaningful_name.vert into /corpora/vert
+* **optional** ```mv meaningful_name.vert meaningful_name_datestamp.vert``` and ```ln -s meaningful_name_datestamp.vert meaningful_name.ver```
 * copy meaningful_name configuration file into /corpora/registry - no extension
 * cd /corpora/registry 
 * compile ```sudo compilecorp --no-sketches --recompile-corpus meaningful_name``` (must match configuration name)
 * check that compilation succeeded and multiple files with meaningful_name.some_extension were added to /corpora/data
 * edit /var/www/bonito/run.cgi - add meaningful_name to corplist - (use Unicode for non ASCII u'meaningful_name' - this is Python 2.7 )
 * restart Apache - ```sudo systemctl restart apache2```
-* Check that newlyd added meaningful_name corpus is available at nosketch.lnb.lv
-* Drink responsibly
+* Check that newly added meaningful_name corpus is available at nosketch.lnb.lv
+* Celebrate success/failure with a responsible drink
