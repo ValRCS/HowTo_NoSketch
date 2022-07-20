@@ -1,0 +1,102 @@
+PATH  /corpora/data/latvian_early_novels
+VERTICAL /corpora/vert/latvian_early_novels.vert
+ENCODING "UTF-8"
+LANGUAGE "Latvian"
+NAME "Latviešu senākie romāni"
+
+ATTRIBUTE  word {
+        LABEL   "Vārdforma"
+}
+
+ATTRIBUTE  tag {
+        LABEL   "Morfoloģiskais tags"
+}
+
+ATTRIBUTE  lemma {
+        LABEL   "Lemma"
+}
+
+
+ATTRIBUTE   lc {
+	LABEL	"Vārdforma (ar maziem burtiem)"
+	DYNAMIC  utf8lowercase
+	DYNLIB   internal
+	ARG1     "C"
+	FUNTYPE  s
+	FROMATTR word
+	TYPE     index
+	TRANSQUERY	yes
+}
+
+ATTRIBUTE   lemma_lc {
+	LABEL	"Lemma (ar maziem burtiem)"
+	DYNAMIC  utf8lowercase
+	DYNLIB   internal
+	ARG1     "C"
+	FUNTYPE  s
+	FROMATTR lemma
+	TYPE     index
+	TRANSQUERY	yes
+}
+
+
+STRUCTURE doc {
+	LABEL "Dokuments"
+
+	ATTRIBUTE title {
+		LABEL "Nosaukums"
+	}
+	ATTRIBUTE creator {
+		LABEL "Autors"
+	}
+	ATTRIBUTE type {
+		LABEL "Žanrs"
+	}
+	ATTRIBUTE dateIssued {
+			LABEL "Izdošanas gads"
+	}
+	ATTRIBUTE firstEdition {
+			LABEL "Pirmais izdevums grāmatā"
+	}
+	ATTRIBUTE firstPublished {
+			LABEL "Pirmā publikācija"
+	}
+	ATTRIBUTE publisher {
+			LABEL "Izdevējs"
+	}
+	ATTRIBUTE dateModified {
+			LABEL "Modificēšanas datums"
+	}
+	ATTRIBUTE copyright {
+			LABEL "Autortiesības"
+	}
+	ATTRIBUTE uri {
+			LABEL "Universālais resursa identifikātors"
+	}
+	ATTRIBUTE ocrCorrection {
+			LABEL "Pareizrakstības pārbaude"
+	}
+	ATTRIBUTE isPartOf {
+			LABEL "Daļa no izdevuma"
+	}
+	ATTRIBUTE normalization {
+			LABEL "Teksta pārveidojumi"
+	}
+	ATTRIBUTE partOf {
+			LABEL "Ietilpst"
+	}
+}
+
+STRUCTURE p {
+	LABEL   "Rindkopa"
+}
+
+STRUCTURE s {
+	LABEL   "Teikums"
+	DISPLAYTAG 0
+	DISPLAYBEGIN " "
+}
+STRUCTURE g {
+	DISPLAYTAG 0
+	DISPLAYBEGIN "_EMPTY_"
+}
