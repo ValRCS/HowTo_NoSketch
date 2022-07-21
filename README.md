@@ -20,6 +20,8 @@ https://nosketch.lnb.lv
 * Collect plaintext and any relevant metadata(title,author,published, et al)
 * Prepare XML file - one file combines multiple plaintext documents with relevant metadata
 * Perform conversion to .vert file - one token per line with its POS and lemma - we use tool developed by nlp.ailab.lv for Latvian language
+```java -Xmx8G  -Dfile.encoding=UTF8 -jar tagger-2.2.1-jar-with-dependencies.jar -vert -keep-tags -output-separators -whitespace-marker -allow-empty-lines < meaningful_name.xml > meaningful_name.vert```
+For Latvian tagger-2.2.1-jar-with-dependencies.jar - contact ailab.lv
 * Create configuration file - example provided at https://github.com/ValRCS/HowTo_NoSketch/blob/main/sample_config/latvian_early_novels
 
 ### The following steps are for internal use as they  require access to our server - researchers should contact dh@lnb.lv to add their corpus
