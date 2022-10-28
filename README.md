@@ -28,7 +28,7 @@ For Latvian tagger-2.2.1-jar-with-dependencies.jar - contact ailab.lv
 
 * copy meaningful_name.vert into /corpora/vert
 * **optional** ```mv meaningful_name.vert meaningful_name_datestamp.vert``` and ```ln -s meaningful_name_datestamp.vert meaningful_name.ver```
-* copy meaningful_name configuration file into /corpora/registry - no extension
+* copy meaningful_name configuration file into ```/corpora/registry``` - no extension
 * cd /corpora/registry 
 * compile ```sudo compilecorp --no-sketches --recompile-corpus meaningful_name``` (must match configuration name)
 * check that compilation succeeded and multiple files with meaningful_name.some_extension were added to /corpora/data
