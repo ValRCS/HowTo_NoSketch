@@ -23,7 +23,7 @@ https://nosketch.lnb.lv
 ```java -Xmx8G  -Dfile.encoding=UTF8 -jar tagger-2.2.1-jar-with-dependencies.jar -vert -keep-tags -output-separators -whitespace-marker -allow-empty-lines < meaningful_name.xml > meaningful_name.vert```
 For Latvian tagger-2.2.1-jar-with-dependencies.jar - contact ailab.lv
 * Create configuration file - example provided at https://github.com/ValRCS/HowTo_NoSketch/blob/main/sample_config/latvian_early_novels
-[Full Docs for Config](https://www.sketchengine.eu/documentation/corpus-configuration-file-all-features/)
+* [Documentation for Config](https://www.sketchengine.eu/documentation/corpus-configuration-file-all-features/)
 
 
 ### The following steps are for internal use as they  require access to our server - researchers should contact dh@lnb.lv to add their corpus
