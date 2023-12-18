@@ -38,3 +38,31 @@ For Latvian tagger-2.2.1-jar-with-dependencies.jar - contact ailab.lv
 * restart Apache - ```sudo systemctl restart apache2```
 * Check that newly added meaningful_name corpus is available at nosketch.lnb.lv
 * Celebrate success/failure with a responsible drink
+
+
+### Steps to add a subcorpus
+
+* ```cd /corpora/registry```
+* if there is no "subcorpora" directory, add it: ```sudo mkdir subcorpora```
+* create a text file meaningful_name.txt into /corpora/registry: ```sudo cat subcorpora/meaningful_name.txt```
+* add corpus title. E.g.: =Subcorpus title
+* in new line, add subcorpus criteria. That can be defined in 2 ways:
+  * using text types (they can be found in corpus info or in registry file under STRUCTURE doc) and its value (value also can be regular expression). E.g.:  
+doc  
+title="The Title"  
+
+  * using CQL query. E.g:  
+-CQL-  
+[tag="N.\*"] [tag="N.\*"]
+* here is example of subcorpus definition file:  
+=Subcorpus "Atdzejojumi"  
+doc  
+title="Atdzejojumi"  <br><br>
+=Other files  
+doc  
+title="[^A].*"  
+* to save file press Ctrl (cmd) + d
+* within the registry file after NAME "Corpus name" add this line:  
+SUBCDEF /corpora/registry/subcorpora/meaningful_name.txt
+* compile subcorpus ```sudo compilecorp --no-sketches --recompile-subcorpora meaningful_name ```  <br><br>
+For each corpus there should be only 1 subcorpus definition file. Within the definition file there can be many subcorpora defined.
