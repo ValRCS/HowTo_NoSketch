@@ -103,8 +103,8 @@ Docker container uses the following structure for corpora
 Registry file head (first two rows) should look like this:
 
 `
-PATH  '/corpora/my_corpus_name/indexed'
-
+PATH  '/corpora/my_corpus_name/indexed'`
+`
 VERTICAL '/corpora/my_corpus_name/vertical/my_corpus_name.vert'
 `
 
