@@ -66,3 +66,16 @@ title="[^A].*"
 SUBCDEF /corpora/registry/subcorpora/meaningful_name.txt
 * compile subcorpus ```sudo compilecorp --no-sketches --recompile-subcorpora meaningful_name ```  <br><br>
 For each corpus there should be only 1 subcorpus definition file. Within the definition file there can be many subcorpora defined.
+
+## Instructions for Docker Container
+
+The following instructions are applicable for Docker Container images from: https://github.com/elte-dh/NoSketch-Engine-Docker - currently used by https://korpuss.lnb.lv
+
+### Creating Container
+
+* Installation https://github.com/elte-dh/NoSketch-Engine-Docker?tab=readme-ov-file#tldr
+* assuming you are using nginx the sole location in your sites-enabled default config would be
+  `	location / {
+		proxy_pass http://127.0.0.1:10070;
+	}`
+
