@@ -101,13 +101,18 @@ Docker container uses the following structure for corpora
   * Copy my_corpus (the registry file) to ${your_install_path}/corpora/registry
 
 Registry file head (first two rows) should look like this:
-`PATH  '/corpora/my_corpus_name/indexed'
+
+`
+PATH  '/corpora/my_corpus_name/indexed'
 VERTICAL '/corpora/my_corpus_name/vertical/my_corpus_name.vert'
 `
 
   * Compile all corpora listed in corpora/registry directory using the docker image: `make compile`
   * Compile individual corpora one at a time - `docker exec noske compilecorp --no-ske --recompile-corpus my_corpus_name`
-    Note: This assumes you default naming for the container - noske.
-    Note2: make execute command as of 16.04.2024 does not work for commands with arguments 
+    
+- Note: This assumes you default naming for the container - noske.
+- Note2: make execute command as of 16.04.2024 does not work for commands with arguments
+- 
     i.e. - `make compile` works but single corpus compilation recommended `make execute CMD="compilecorp --no-ske --recompile-corpus CORPUS_REGISTRY_FILE` does not work due the the way Docker processes arguments in container's shell
-    There are workarounds for this see: https://stackoverflow.com/questions/32727594/how-to-pass-arguments-to-shell-script-through-docker-run
+
+  There are workarounds for this see: https://stackoverflow.com/questions/32727594/how-to-pass-arguments-to-shell-script-through-docker-run
