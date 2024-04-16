@@ -105,9 +105,9 @@ Registry file head (first two rows) should look like this:
 `
 PATH  '/corpora/my_corpus_name/indexed'`
 
+
 `
-VERTICAL '/corpora/my_corpus_name/vertical/my_corpus_name.vert'
-`
+VERTICAL '/corpora/my_corpus_name/vertical/my_corpus_name.vert'`
 
   * Compile all corpora listed in corpora/registry directory using the docker image: `make compile`
   * Compile individual corpora one at a time - `docker exec noske compilecorp --no-ske --recompile-corpus my_corpus_name`
