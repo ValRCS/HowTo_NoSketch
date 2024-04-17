@@ -11,7 +11,7 @@ This file is usually found in ` /var/www/crystal/` and is served by the web serv
 
 ### Fixed banner to indicate new version at a different site
 
-We added a fixed div element of class "fixed-banner" that indicated a new version was available at a different site - korpuss.lnb.lv - and a link to the new version.
+We added a fixed div element of class "fixed-banner" that indicated a new version was available at a different site - [Korpuss.lnb.lv](https://korpuss.lnb.lv) - and a link to the new version.
 
 Also we added a script to move the fixed element to bottom right corner of the screen after a timeout of 10 seconds.
 
