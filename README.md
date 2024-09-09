@@ -12,6 +12,10 @@ NoSketch Engine is an open source version of Sketch Engine with certain function
 ## NoSketch at National Library of Latvia
 
 NoSketch Engine is available to researchers and interested public at the following address
+https://korpuss.lnb.lv
+
+Older version (based on older version of nosketch Engine with less functionality)
+Preserved to avoid linkrot.
 https://nosketch.lnb.lv
 
 ---
