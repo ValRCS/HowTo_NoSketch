@@ -40,9 +40,11 @@ It was the best of times, it was the worst of times, it was the age of wisdom, i
 Vert file will contain morphologically tagged tokens and their lemmas
 
 * Perform conversion to .vert file - one token per line with its POS and lemma - we use tool developed by nlp.ailab.lv for Latvian language
-
+Old version instructions
 ```java -Xmx8G  -Dfile.encoding=UTF8 -jar tagger-2.2.1-jar-with-dependencies.jar -vert -keep-tags -output-separators -whitespace-marker -allow-empty-lines < meaningful_name.xml > meaningful_name.vert```
-
+Newer tagger version has option for multiple cores ```-processors=N``` where N should be less than your total number of cores.
+Note: we've experience some heap overruns with the newer version, so consider adjusting heap.
+```java -Xmx8G -Dfile.encoding=UTF8 -jar ~/jar/tagger-2.5.3.jar -processors=3 -vert -keep-tags -output-separators -whitespace-marker -allow-empty-lines < top_music_term_texts_20250225.xml > top_music_term_texts_20250225.vert```
 * Latest version of tagger should be available here - https://mvnrepository.com/artifact/lv.ailab.morphology/tagger or contact ailab.lv
 * We store tagger jar files in ```/usr/local/bin``` for access by all users
 
