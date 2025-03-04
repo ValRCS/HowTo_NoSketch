@@ -25,7 +25,8 @@ https://nosketch.lnb.lv
 * Prepare XML file - one file combines multiple plaintext documents with relevant metadata
 * XML files consists of multiple documents
 * Each document is wrapped in <doc></doc> - usually <doc will have some attributes such as title, author etc)
-  ```<doc title="Tale of Two Cities" author="Charles Dickens" firstIssued="1859" anotherAttribute="value2">
+```
+<doc title="Tale of Two Cities" author="Charles Dickens" firstIssued="1859" anotherAttribute="value2">
 It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way—in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only.
   </doc>
   <doc title="Wuthering Heights" author="Emily Bronte" dateIss>
