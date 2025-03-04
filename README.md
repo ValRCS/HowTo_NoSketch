@@ -23,9 +23,30 @@ https://nosketch.lnb.lv
 
 * Collect plaintext and any relevant metadata(title,author,published, et al)
 * Prepare XML file - one file combines multiple plaintext documents with relevant metadata
+* XML files consists of multiple documents
+* Each document is wrapped in <doc></doc> - usually <doc will have some attributes such as title, author etc)
+  ```<doc title="Tale of Two Cities" author="Charles Dickens" firstIssued="1859" anotherAttribute="value2">
+It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way—in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only.
+  </doc>
+  <doc title="Wuthering Heights" author="Emily Bronte" dateIss>
+  1801—I have just returned from a visit to my landlord—the solitary neighbour that I shall be troubled with. This is certainly a beautiful country! In all England, I do not believe that I could have fixed on a situation so completely removed from the stir of society.
+</doc>
+```
+  
+
+### Conversion of XML file to VERT file
+
+Vert file will contain morphologically tagged tokens and their lemmas
+
 * Perform conversion to .vert file - one token per line with its POS and lemma - we use tool developed by nlp.ailab.lv for Latvian language
+
 ```java -Xmx8G  -Dfile.encoding=UTF8 -jar tagger-2.2.1-jar-with-dependencies.jar -vert -keep-tags -output-separators -whitespace-marker -allow-empty-lines < meaningful_name.xml > meaningful_name.vert```
-For Latvian tagger-2.2.1-jar-with-dependencies.jar - contact ailab.lv
+
+* Latest version of tagger should be available here - https://mvnrepository.com/artifact/lv.ailab.morphology/tagger or contact ailab.lv
+* We store tagger jar files in ```/usr/local/bin``` for access by all users
+
+### Creating NoSketch configuration file
+  
 * Create configuration file - example provided at https://github.com/ValRCS/HowTo_NoSketch/blob/main/sample_config/latvian_early_novels
 * [Documentation for Config](https://www.sketchengine.eu/documentation/corpus-configuration-file-all-features/)
 
