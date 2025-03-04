@@ -47,7 +47,7 @@ Note: we've experience some heap overruns with the newer version, so consider ad
 
 Newer version example:
 
-```java -Xmx8G -Dfile.encoding=UTF8 -jar ~/jar/tagger-2.5.10.jar -processors=3 -vert -keep-tags -output-separators -whitespace-marker -allow-empty-lines < top_music_term_texts_20250225.xml > top_music_term_texts_20250225.vert```
+```java -Xmx8G -Dfile.encoding=UTF8 -jar tagger-2.5.10.jar -processors=3 -vert -keep-tags -output-separators -whitespace-marker -allow-empty-lines < top_music_term_texts_20250225.xml > top_music_term_texts_20250225.vert```
 
 * Latest version of tagger should be available here - https://mvnrepository.com/artifact/lv.ailab.morphology/tagger or contact ailab.lv
 * We store tagger jar files in ```/usr/local/bin``` for access by all users
