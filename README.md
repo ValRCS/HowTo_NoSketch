@@ -52,7 +52,7 @@ Newer version example:
 * Latest version of tagger should be available here - https://mvnrepository.com/artifact/lv.ailab.morphology/tagger or contact ailab.lv
 * We store tagger jar files in ```/usr/local/bin``` for access by all users
 
-### Creating NoSketch configuration file
+### Creating NoSketch configuration file - registry file
   
 * Create configuration file - example provided at https://github.com/ValRCS/HowTo_NoSketch/blob/main/sample_config/latvian_early_novels
 * [Documentation for Config](https://www.sketchengine.eu/documentation/corpus-configuration-file-all-features/)
