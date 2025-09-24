@@ -60,6 +60,18 @@ https://www.sketchengine.eu/documentation/common-corpus-structures/
   
 * Create configuration file - example provided at https://github.com/ValRCS/HowTo_NoSketch/blob/main/sample_config/latvian_early_novels
 * [Documentation for Config](https://www.sketchengine.eu/documentation/corpus-configuration-file-all-features/)
+* 
+
+### NoSketch limitations
+
+NoSketch does not have the full support for SketchEngine features.
+
+More on differences between NoSketch Engine and Sketch Engine here: https://www.sketchengine.eu/nosketch-engine/
+
+For Example you CAN create a config file entry `DIACHRONIC "doc.firstEdition"` for trends analysis and see Trends enabled on the main screen for corpus.
+However, the actual Trends will NOT be compiled and will NOT be available.
+
+Thus to use feature such as Trends: https://www.sketchengine.eu/guide/trends/ you will have to purchase the Sketch Engine from the creators. Unfortunately paid version can NOT be self hosted at your organization. :(
 
 
 ### The following steps are for internal use as they  require access to our server - researchers should contact dh@lnb.lv to add their corpus
