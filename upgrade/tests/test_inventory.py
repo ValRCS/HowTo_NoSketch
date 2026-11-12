@@ -51,6 +51,20 @@ class InventoryTests(unittest.TestCase):
             self.assertTrue(report["sample_corpus_layouts"][0]["indexed_exists"])
             self.assertTrue(report["registry"]["exists"])
 
+    def test_host_mount_driver_secret_excluded(self):
+        mounts = inventory.host_mount_summary([{
+            "Type": "volume", "Source": "corpora", "Target": "/corpora",
+            "ReadOnly": True,
+            "VolumeOptions": {
+                "NoCopy": True,
+                "DriverConfig": {"Name": "local", "Options": {"password": "SUPER_SECRET"}},
+            },
+        }])
+        encoded = json.dumps(mounts)
+        self.assertNotIn("SUPER_SECRET", encoded)
+        self.assertNotIn("DriverConfig", encoded)
+        self.assertTrue(mounts[0]["volume_options"]["NoCopy"])
+
     def test_missing_mount(self):
         self.assertIn("No mount", inventory.corpora_info(None)["status"])
 
