@@ -166,3 +166,18 @@ VERTICAL '/corpora/my_corpus_name/vertical/my_corpus_name.vert'`
     i.e. - `make compile` works but single corpus compilation recommended `make execute CMD="compilecorp --no-ske --recompile-corpus CORPUS_REGISTRY_FILE` does not work due the the way Docker processes arguments in container's shell
 
   There are workarounds for this see: https://stackoverflow.com/questions/32727594/how-to-pass-arguments-to-shell-script-through-docker-run
+
+---
+
+## Production upgrade: read-only Docker inventory (2026)
+
+Before replacing the `noske` container behind [korpuss.lnb.lv](https://korpuss.lnb.lv), capture the original image ID, **all Docker bind mounts**, corpus mappings, persistent state, ports, and runtime information. This inventory is read-only with respect to the service, with private reports written outside the checkout.
+
+See [upgrade/README.md](upgrade/README.md) for instructions and safeguards.
+
+```bash
+cd /home/valdiss/github
+git clone https://github.com/ValRCS/HowTo_NoSketch.git
+cd HowTo_NoSketch
+bash upgrade/run_inventory.sh
+```
