@@ -74,6 +74,23 @@ def mounts_of(items):
     } for item in items or []]
 
 
+def host_mount_summary(items):
+    """Preserve mount options without leaking volume driver credentials."""
+    result = []
+    for item in items or []:
+        bind = item.get("BindOptions") or {}
+        volume = item.get("VolumeOptions") or {}
+        result.append({
+            "type": item.get("Type"), "source": item.get("Source"),
+            "target": item.get("Target"), "read_only": item.get("ReadOnly"),
+            "bind_options": {k: bind[k] for k in
+                             ("Propagation", "NonRecursive", "CreateMountpoint") if k in bind},
+            "volume_options": {k: volume[k] for k in ("NoCopy", "Subpath")
+                               if k in volume},
+        })
+    return result
+
+
 def covering_mount(path, mounts):
     matches = [m for m in mounts if m.get("destination") and
                (m["destination"] == "/" or
@@ -274,7 +291,7 @@ def main():
             "status": (obj.get("State") or {}).get("Status"),
             "mounts": mounts,
             "host_binds": hostconfig.get("Binds") or [],
-            "host_mounts": hostconfig.get("Mounts") or [],
+            "host_mounts": host_mount_summary(hostconfig.get("Mounts")),
             "ports": network.get("Ports") or {},
             "auto_remove": hostconfig.get("AutoRemove"),
             "restart_policy": hostconfig.get("RestartPolicy") or {},
