@@ -62,3 +62,7 @@ python3 -m unittest discover -s upgrade/tests -v
 ## Decision gates
 
 Before any upgrade: verify the original `/corpora` bind mount, additional binds, whether `/var/lib/bonito` is persistent, AutoRemove, exact image ID, and current nginx upstream port. **This script does not create backups and does not establish index compatibility.**
+
+## Next phase: guarded backups
+
+Do not stop or replace the production container until its live state, original image, corpus bind mount and deployment configuration have been backed up and independently restored in a test environment. Use [backup/README.md](backup/README.md) for **preflight**, explicit state-first backup, corpus transfer, checksum verification and security controls. The separate [backup/RESTORE.md](backup/RESTORE.md) describes the isolated restore drill and rollback gate. Neither the inventory nor the backup scripts modify the running container or compile corpora.

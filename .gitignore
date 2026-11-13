@@ -1,3 +1,8 @@
 out
 noske-inventory-*/
 upgrade/output/
+
+# Never version private backup artifacts/reports
+noske-backup-*/
+upgrade/backup/output/
+upgrade/backup/backups/

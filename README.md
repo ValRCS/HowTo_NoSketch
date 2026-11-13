@@ -181,3 +181,7 @@ git clone https://github.com/ValRCS/HowTo_NoSketch.git
 cd HowTo_NoSketch
 bash upgrade/run_inventory.sh
 ```
+
+## Production upgrade: protected backups (2026)
+
+After the read-only inventory, follow [upgrade/backup/README.md](upgrade/backup/README.md) for guarded backups of the original image, writable container state, deployment files and all corpora. Verify checksums and perform the isolated restoration drill in [upgrade/backup/RESTORE.md](upgrade/backup/RESTORE.md) before any production replacement. Generated backup data and private metadata must never be committed.
