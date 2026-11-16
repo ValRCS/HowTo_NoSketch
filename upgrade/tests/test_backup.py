@@ -106,7 +106,7 @@ class BackupTests(unittest.TestCase):
             capture = Capture()
             with patch.object(backup.sys, "stdout", capture):
                 backup.log_rsync(command, path, show_progress=True)
-            self.assertEqual(b"20%\\r100%\\n", capture.buffer.getvalue())
+            self.assertEqual(b"20%\r100%\n", capture.buffer.getvalue())
             self.assertEqual(capture.buffer.getvalue(), path.read_bytes())
             self.assertEqual(0o600, path.stat().st_mode & 0o777)
 
