@@ -153,12 +153,40 @@ def load_manifest(destination):
         return json.load(f)
 
 
-def log_rsync(args, path):
+def corpus_rsync_args(source, target):
+    """Build a resumable corpus copy with stable overall progress estimates."""
+    return ["rsync", "-aHAX", "--numeric-ids", "--one-file-system",
+            "--partial", "--no-inc-recursive", "--info=progress2", "--stats",
+            str(source) + "/", str(target) + "/"]
+
+
+def log_rsync(args, path, *, show_progress=False):
+    """Capture rsync output privately; mirror progress to an interactive terminal."""
     with path.open("wb") as f:
-        result = subprocess.run(args, stdout=f, stderr=subprocess.STDOUT, check=False)
+        if show_progress:
+            proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            try:
+                while True:
+                    chunk = os.read(proc.stdout.fileno(), 8192)
+                    if not chunk:
+                        break
+                    f.write(chunk)
+                    if sys.stdout.isatty():
+                        sys.stdout.buffer.write(chunk)
+                        sys.stdout.buffer.flush()
+                returncode = proc.wait()
+            except BaseException:
+                if proc.poll() is None:
+                    proc.kill()
+                proc.wait()
+                raise
+            finally:
+                proc.stdout.close()
+        else:
+            returncode = subprocess.run(args, stdout=f, stderr=subprocess.STDOUT, check=False).returncode
     path.chmod(0o600)
-    if result.returncode:
-        fail(f"rsync failed (exit {result.returncode}); inspect private {path}")
+    if returncode:
+        fail(f"rsync failed (exit {returncode}); inspect private {path}")
 
 
 def backup(prefix, name, destination, phase, resume, allow_same_filesystem=False):
@@ -237,9 +265,8 @@ def backup(prefix, name, destination, phase, resume, allow_same_filesystem=False
         target = destination / "corpora"
         target.mkdir(mode=0o700, exist_ok=True)
         print("Copying corpora with rsync; source remains untouched...", flush=True)
-        log_rsync(["rsync", "-aHAX", "--numeric-ids", "--one-file-system",
-                   "--partial", "--stats", str(source) + "/", str(target) + "/"],
-                  destination / "corpora-rsync.log")
+        log_rsync(corpus_rsync_args(source, target),
+                  destination / "corpora-rsync.log", show_progress=True)
         manifest["corpora_complete"] = True
         save_manifest(destination, manifest)
         print("Corpus transfer complete. Run verify with --compare-live.")

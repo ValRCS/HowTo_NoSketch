@@ -46,6 +46,12 @@ The two execution phases deliberately allow backing up vulnerable container stat
 
 `--phase all` is also supported for a fresh backup, but is not preferred for the first production run because the large corpus transfer may take substantial time.
 
+## Transfer progress
+
+The corpus-copy phase uses rsync's built-in `--info=progress2` display (no `tqdm` installation required), mirrored to the interactive terminal and written to the private `corpora-rsync.log`. It shows approximate cumulative bytes, percentage, transfer rate, and ETA. The first progress update may be delayed while `--no-inc-recursive` builds the complete file list, and rates/ETAs can fluctuate. Resumed transfers show progress against the remaining rsync workload, not necessarily against the original 55 GiB corpus total.
+
+Use a persistent terminal multiplexer such as `tmux` for long SSH sessions; disconnecting an ordinary SSH terminal may interrupt the backup. Progress logs can contain corpus paths or rsync errors, so keep them private.
+
 ## Files and security
 
 The new destination is `0700`; the manifest and private reports are `0600`. Typical contents:

@@ -1,4 +1,6 @@
 import importlib.util
+import io
+import sys
 import gzip
 import json
 import subprocess
@@ -80,6 +82,40 @@ class BackupTests(unittest.TestCase):
     def test_backup_requires_execute(self):
         with tempfile.TemporaryDirectory() as d:
             self.assertEqual(2, backup.main(["backup", "--destination", str(Path(d)/"a")]))
+
+    def test_corpus_rsync_enables_overall_progress(self):
+        args = backup.corpus_rsync_args(Path("/source"), Path("/destination"))
+        self.assertIn("--info=progress2", args)
+        self.assertIn("--no-inc-recursive", args)
+        self.assertIn("--partial", args)
+        self.assertNotIn("--delete", args)
+        self.assertEqual(["/source/", "/destination/"], args[-2:])
+
+    def test_progress_is_mirrored_to_terminal_and_private_log(self):
+        class Capture:
+            def __init__(self):
+                self.buffer = io.BytesIO()
+
+            def isatty(self):
+                return True
+
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "corpora-rsync.log"
+            command = [sys.executable, "-c",
+                       "import sys; sys.stdout.buffer.write(b'20%\\r100%\\n')"]
+            capture = Capture()
+            with patch.object(backup.sys, "stdout", capture):
+                backup.log_rsync(command, path, show_progress=True)
+            self.assertEqual(b"20%\\r100%\\n", capture.buffer.getvalue())
+            self.assertEqual(capture.buffer.getvalue(), path.read_bytes())
+            self.assertEqual(0o600, path.stat().st_mode & 0o777)
+
+    def test_progress_stream_fails_on_child_error(self):
+        with tempfile.TemporaryDirectory() as temp:
+            log = Path(temp) / "corpora-rsync.log"
+            command = [sys.executable, "-c", "import sys; sys.exit(5)"]
+            with self.assertRaisesRegex(RuntimeError, "exit 5"):
+                backup.log_rsync(command, log, show_progress=True)
 
 
 if __name__ == "__main__":
